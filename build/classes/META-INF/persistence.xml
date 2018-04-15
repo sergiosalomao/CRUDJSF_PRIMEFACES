@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="crud-jsf">
+	
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> <!-- Provedor HIBERNATE -->
+		<!-- CLASSES MAPEADAS -->
+		<class>br.com.sistema.model.Aluno</class>
+		<class>br.com.sistema.model.Curso</class>
+	
+	
+		
+		<properties>
+			<property name="hibernate.archive.autodetection" value="class" /> <!-- informa o mapeamento automatico das classes sem precisar declarar em cima -->
+			<!-- configuracoes do banco -->
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sistema" /> <!-- BD Name -->
+			<property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+			<property name="javax.persistence.jdbc.password" value="postgres" /> <!-- DB Password -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> <!-- DB Dialect -->
+			<property name="hibernate.default_schema" value="evolucao" /> <!-- DB schema -->
+			
+			<!-- Define o modo que seram criadas as tabelas  -->
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- create / create-drop / update -->
+			
+			
+			<!-- configuracoes de debugs -->
+			<property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+			<property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
+			
+		</properties>
+	
+	</persistence-unit>
+</persistence>

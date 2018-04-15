@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<!-- Content -->
+	<ui:define name="content">
+
+		<!-- Painel principal -->
+		<p:panel styleClass="bg-light" style="border-radius:0; border:0">
+
+			<h:form id="formCadastro">
+				<span class="text-center active font-weight-bold"
+					style="font-size: 22px">ALUNOS</span>
+
+				<!-- Mensagens -->
+				<p:growl id="growl" showDetail="true" life="3000" />
+
+				<p:panel id="pnCadastro">
+					<p:focus for="edtCpf" />
+					<h:panelGrid columns="4">
+
+						<p:column colspan="2">
+
+							<!-- Código -->
+							<p:outputLabel for="edtId">Codigo </p:outputLabel>
+							<p:inputText id="edtId" value="#{alunoMB.aluno.id}"
+								disabled="true" style="width:60px;margin:5px;" />
+
+							<!-- CPF -->
+							<p:outputLabel for="edtCpf">CPF </p:outputLabel>
+							<p:inputMask id="edtCpf" value="#{alunoMB.aluno.cpf}"
+								disabled="#{alunoMB.IsFind()}" mask="999.999.999-99"
+								style="width:90px;margin:5px;" />
+
+							<!-- Nome -->
+							<p:outputLabel for="edtNome">Nome </p:outputLabel>
+							<p:inputText id="edtNome" value="#{alunoMB.aluno.nome}"
+								disabled="#{alunoMB.IsFind()}" style="width:400px;margin:5px;" />
+
+
+							<!-- Idade -->
+							<p:outputLabel for="edtIdade">Idade </p:outputLabel>
+							<p:inputText id="edtIdade" value="#{alunoMB.aluno.idade}"
+								disabled="#{alunoMB.IsFind()}" style="width:40px;margin:5px;" />
+
+						</p:column>
+					</h:panelGrid>
+					<br />
+
+					<!-- Botão Novo -->
+					<p:commandButton value="Novo" action="#{alunoMB.prepareInsert()}"
+						update="mainContent:formList, pnCadastro, growl" />
+
+					<!-- Botão Salvar -->
+					<p:commandButton value="Salvar" action="#{alunoMB.save()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{alunoMB.IsFind()}" />
+
+					<!-- Botão Cancelar -->
+					<p:commandButton value="Cancelar" action="#{alunoMB.cancel()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{alunoMB.IsFind()}" />
+
+				</p:panel>
+			</h:form>
+			<!-- end formMain -->
+
+
+
+
+			<h:form id="formList">
+				<p:panel id="pnList">
+					<p:dataTable id="tb_aluno" var="alunos" rowIndexVar="item"
+						emptyMessage="Sem dados na tabela." value="#{alunoMB.list_aluno}"
+						paginator="true" paginatorPosition="top" rows="10"
+						sortBy="#{alunos.nome}" expandableRowGroups="true">
+
+						<f:facet name="header">Lista de Alunos</f:facet>
+
+						<p:column headerText="Codigo" width="100">
+							<h:outputText value="#{alunos.id}" />
+						</p:column>
+
+						<p:column headerText="CPF">
+							<h:outputText value="#{alunos.cpf}" />
+						</p:column>
+
+						<p:column headerText="Name">
+							<h:outputText value="#{alunos.nome}" />
+						</p:column>
+
+						<p:column headerText="Idade">
+							<h:outputText value="#{alunos.cpf}" />
+						</p:column>
+
+
+						<!-- ACOES DA LISTA -->
+						<p:column width="80" headerText="Opções">
+
+							<!-- CHAMA DIALOG PARA ALTERAR -->
+							<p:commandButton icon="ui-icon-pencil" process="@this"
+								action="#{alunoMB.prepareEdit()}" update="mainContent:formCadastro:pnCadastro">
+								<f:setPropertyActionListener value="#{alunos}"
+									target="#{alunoMB.selected_aluno}" />
+							</p:commandButton>
+
+
+							<!-- CHAMA DIALOG PARA APAGAR -->
+							<p:commandButton icon="ui-icon-trash" process="@this"
+								onclick="PF('dlg_delete').show()" update="mainContent:formList">
+								<f:setPropertyActionListener value="#{alunos}"
+									target="#{alunoMB.selected_aluno}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+
+			</h:form>
+			<!-- end formList -->
+		</p:panel>
+		<!-- end painel principal -->
+
+
+
+		<!-- DIALIGO EXCLUIR LANÇAMENTO -->
+		<p:dialog widgetVar="dlg_delete" closable="false" draggable="false"
+			resizable="false" modal="true">
+			<f:facet name="header">
+				<p:outputLabel value="Deseja Excluir este registro?"></p:outputLabel>
+			</f:facet>
+
+			<f:facet name="footer">
+				<p:commandButton value="Excluir" action="#{alunoMB.delete()}"
+					update="mainContent:formList" process="@this"
+					onclick="PF('dlg_delete').hide();" />
+
+				<p:commandButton value="Cancelar" update="mainContent:formList"
+					onclick="PF('dlg_delete').hide();" action="#{alunoMB.cancel()}" />
+			</f:facet>
+		</p:dialog>
+
+	</ui:define>
+
+	<!-- Footer -->
+	<ui:define name="footer">
+
+		<h5 class="text-center font-weight-light">Developer Sergio
+			Salomão.</h5>
+
+	</ui:define>
+
+</ui:composition>

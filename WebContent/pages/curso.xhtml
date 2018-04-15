@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<!-- Content -->
+	<ui:define name="content">
+
+		<!-- Painel principal -->
+		<p:panel styleClass="bg-light" style="border-radius:0; border:0">
+
+			<h:form id="formCadastro">
+				<span class="text-center active font-weight-bold"
+					style="font-size: 22px">CURSOS</span>
+
+				<!-- Mensagens -->
+				<p:growl id="growl" showDetail="true" life="3000" />
+
+				<p:panel id="pnCadastro">
+					<p:focus for="edtCodCurso" />
+					<h:panelGrid columns="4">
+
+						<p:column colspan="2">
+
+							<!-- ID -->
+							<p:outputLabel for="edtId">Id </p:outputLabel>
+							<p:inputText id="edtId" value="#{cursoMB.curso.id}"
+								disabled="true" style="width:60px;margin:5px;" />
+
+							<!-- Código Curso -->
+							<p:outputLabel for="edtCodCurso">Código </p:outputLabel>
+							<p:inputText id="edtCodCurso" value="#{cursoMB.curso.codigo}"
+								disabled="#{cursoMB.IsFind()}" style="width:90px;margin:5px;" />
+
+							<!-- Nome -->
+							<p:outputLabel for="edtNome">Nome Curso </p:outputLabel>
+							<p:inputText id="edtNome" value="#{cursoMB.curso.curso}"
+								disabled="#{cursoMB.IsFind()}" style="width:400px;margin:5px;" />
+
+						</p:column>
+					</h:panelGrid>
+					<br />
+
+					<!-- Botão Novo -->
+					<p:commandButton value="Novo" action="#{cursoMB.prepareInsert()}"
+						update="mainContent:formList, pnCadastro, growl" />
+
+					<!-- Botão Salvar -->
+					<p:commandButton value="Salvar" action="#{cursoMB.save()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{cursoMB.IsFind()}" />
+
+					<!-- Botão Cancelar -->
+					<p:commandButton value="Cancelar" action="#{cursoMB.cancel()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{cursoMB.IsFind()}" />
+
+				</p:panel>
+			</h:form>
+			<!-- end formMain -->
+
+
+
+
+			<h:form id="formList">
+				<p:panel id="pnList">
+					<p:dataTable id="tb_curso" var="cursos" rowIndexVar="item"
+						emptyMessage="Sem dados na tabela." value="#{cursoMB.list_curso}"
+						paginator="true" paginatorPosition="top" rows="10"
+						sortBy="#{cursos.curso}" expandableRowGroups="true">
+
+						<f:facet name="header">Lista de Cursos</f:facet>
+
+						<p:column headerText="Id" width="30">
+							<h:outputText value="#{cursos.id}" />
+						</p:column>
+
+
+						<p:column headerText="Codigo" width="60">
+							<h:outputText value="#{cursos.codigo}" />
+						</p:column>
+
+
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{cursos.curso}" />
+						</p:column>
+
+
+
+
+						<!-- ACOES DA LISTA -->
+						<p:column width="80" headerText="Opções">
+
+							<!-- CHAMA DIALOG PARA ALTERAR -->
+							<p:commandButton icon="ui-icon-pencil" process="@this"
+								action="#{cursoMB.prepareEdit()}"
+								update="mainContent:formCadastro:pnCadastro">
+								<f:setPropertyActionListener value="#{cursos}"
+									target="#{cursoMB.selected_curso}" />
+							</p:commandButton>
+
+
+							<!-- CHAMA DIALOG PARA APAGAR -->
+							<p:commandButton icon="ui-icon-trash" process="@this"
+								onclick="PF('dlg_delete').show()" update="mainContent:formList">
+								<f:setPropertyActionListener value="#{cursos}"
+									target="#{cursoMB.selected_curso}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+
+			</h:form>
+			<!-- end formList -->
+		</p:panel>
+		<!-- end painel principal -->
+
+
+		<!-- DIALIGO EXCLUIR LANÇAMENTO -->
+		<p:dialog widgetVar="dlg_delete" closable="false" draggable="false"
+			resizable="false" modal="true">
+			<f:facet name="header">
+				<p:outputLabel value="Deseja Excluir este registro?"></p:outputLabel>
+			</f:facet>
+
+			<f:facet name="footer">
+				<p:commandButton value="Excluir" action="#{cursoMB.delete()}"
+					update="mainContent:formList" process="@this"
+					onclick="PF('dlg_delete').hide();" />
+
+				<p:commandButton value="Cancelar" update="mainContent:formList"
+					onclick="PF('dlg_delete').hide();" action="#{cursoMB.cancel()}" />
+			</f:facet>
+		</p:dialog>
+
+
+	</ui:define>
+
+	<!-- Footer -->
+	<ui:define name="footer">
+
+		<h5 class="text-center font-weight-light">Developer Sergio
+			Salomão.</h5>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CRUD JSF | JSF e PRIMEFACES</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- Framework Leafs -->
+	<link rel="stylesheet" href="resources/Leafs/css/leaf-all-1.0.css" type="text/css"/>
+	<h:outputStylesheet name="Leafs/css/leaf-all-1.0.css"/>
+</h:head>
+
+<!-- Template -->
+<!-- Menu Principal -->
+		<p:menubar autoDisplay="false" style="border-radius:0px;border:0px;">
+
+			<p:menuitem value="Inicio" url="/index.xhtml" />
+
+			<p:menuitem value="Aluno" url="/pages/aluno.xhtml" />
+			
+			<p:menuitem value="Curso" url="/pages/curso.xhtml" />
+			
+			<p:menuitem value="Sobre" url="https://github.com/sergiosalomao/ControleEspera" />
+
+			<p:menuitem value="Sair" url="https://github.com/sergiosalomao/" />
+
+		</p:menubar>
+
+<h:body>
+	<h:form id="mainContent">
+		<ui:insert name="content" />
+		<ui:insert name="footer" />
+	</h:form>
+</h:body>
+</html>
