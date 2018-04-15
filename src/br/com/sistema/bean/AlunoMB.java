@@ -77,11 +77,7 @@ public class AlunoMB extends CrudBean implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Alterado com sucesso.", null));
 
-				if (IsFind()) {
-
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO, "Modo Find", null));
-				}
+				
 			}
 
 		} catch (
@@ -93,7 +89,7 @@ public class AlunoMB extends CrudBean implements Serializable {
 			aluno = null;
 			AlterFind();
 			list_aluno = daoAluno.findAll();
-			System.out.println(state + "<---------------------------------- saindo do save");
+			
 		}
 
 	}

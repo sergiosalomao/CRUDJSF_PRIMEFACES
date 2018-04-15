@@ -77,11 +77,7 @@ public class CursoMB extends CrudBean implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Alterado com sucesso.", null));
 
-				if (IsFind()) {
-
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_INFO, "Modo Find", null));
-				}
+				
 			}
 
 		} catch (
