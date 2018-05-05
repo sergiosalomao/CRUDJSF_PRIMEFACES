@@ -9,14 +9,21 @@ import javax.persistence.Persistence;
 
 import br.com.sistema.model.Aluno;
 
-public class AlunoDAO implements CrudDAO<Aluno> {
+public class AlunoDAO extends JPAUtil implements CrudDAO<Aluno> {
 
 	EntityManager manager;
 	EntityTransaction transaction;
-	static EntityManagerFactory factory = Persistence.createEntityManagerFactory("crud-jsf");
+	
+	
 
+	public void getConection() {
+		
+		
+	}
+	
+	
 	public AlunoDAO() {
-		manager = factory.createEntityManager();
+		manager = JPAUtil.getFactory().createEntityManager();
 	}
 
 	public void save(Aluno entity) throws Exception {

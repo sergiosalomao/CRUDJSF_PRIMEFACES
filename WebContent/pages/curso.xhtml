@@ -57,6 +57,11 @@
 					<p:commandButton value="Cancelar" action="#{cursoMB.cancel()}"
 						update="mainContent:formList, pnCadastro, growl"
 						disabled="#{cursoMB.IsFind()}" />
+						
+								<!-- Botão Imprimir -->
+					<p:commandButton value="Imprimir" action="#{cursoMB.imprimir()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{cursoMB.IsInsert()}" ajax="false"/>
 
 				</p:panel>
 			</h:form>

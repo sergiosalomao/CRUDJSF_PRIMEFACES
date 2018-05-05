@@ -6,6 +6,8 @@
 		<!-- CLASSES MAPEADAS -->
 		<class>br.com.sistema.model.Aluno</class>
 		<class>br.com.sistema.model.Curso</class>
+		<class>br.com.sistema.model.Professor</class>
+		
 	
 	
 		

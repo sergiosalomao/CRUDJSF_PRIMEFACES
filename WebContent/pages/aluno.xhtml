@@ -45,6 +45,7 @@
 							<!-- Idade -->
 							<p:outputLabel for="edtIdade">Idade </p:outputLabel>
 							<p:inputText id="edtIdade" value="#{alunoMB.aluno.idade}"
+							converterMessage="Valor digitado nao é numero!"
 								disabled="#{alunoMB.IsFind()}" style="width:40px;margin:5px;" />
 
 						</p:column>
@@ -64,6 +65,11 @@
 					<p:commandButton value="Cancelar" action="#{alunoMB.cancel()}"
 						update="mainContent:formList, pnCadastro, growl"
 						disabled="#{alunoMB.IsFind()}" />
+						
+							<!-- Botão Imprimir -->
+					<p:commandButton value="Imprimir" action="#{alunoMB.imprimir()}"
+						update="mainContent:formList, pnCadastro, growl"
+						disabled="#{alunoMB.IsInsert()}" ajax="false"/>
 
 				</p:panel>
 			</h:form>
