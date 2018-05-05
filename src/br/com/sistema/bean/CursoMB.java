@@ -118,11 +118,12 @@ public class CursoMB extends CrudBean implements Serializable {
 	public void imprimir() throws JRException, IOException {
 
 		AlterFind();
-
+		
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 		
+		//arquivo criado no Ireport rel_curso.jasper
 		String nomeArquivo = request.getServletContext().getRealPath("/relatorios/rel_curso.jasper");
 		JRPdfExporter pdfExporter = new JRPdfExporter();
 		JasperPrint jPrint = JasperFillManager.fillReport(nomeArquivo, null,  Conexao.getConnection());

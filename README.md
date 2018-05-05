@@ -20,6 +20,8 @@
        <img src="https://github.com/sergiosalomao/CRUDJSF_PRIMEFACES/blob/master/Screenshot/screen3.png">
         <br>
         <img src="https://github.com/sergiosalomao/CRUDJSF_PRIMEFACES/blob/master/Screenshot/screen4.png">
+          <br>
+        <img src="https://github.com/sergiosalomao/CRUDJSF_PRIMEFACES/blob/master/Screenshot/screen5.png">
 </div>        
    
 </body>
